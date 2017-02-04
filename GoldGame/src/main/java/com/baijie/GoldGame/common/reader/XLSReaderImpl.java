@@ -22,7 +22,7 @@ import com.baijie.GoldGame.gold.Item;
  * @author baijie
  *
  */
-public class XLSReaderImpl {
+public class XLSReaderImpl implements XLSReader{
 	
 
 	public List<StockData> ReadExcel(String name){

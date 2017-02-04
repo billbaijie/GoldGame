@@ -10,6 +10,7 @@ import com.baijie.GoldGame.gold.Item;
  * @author baijie
  *价值定投的买家类
  *每个月让自己的持股价值增加一个定值
+ *在盈利率达到一定水准时，平仓卖出，并重新开始定投
  */
 public class BuyerImpl extends Buyer{
 	
@@ -18,6 +19,7 @@ public class BuyerImpl extends Buyer{
 		BigDecimal currentMonth = new BigDecimal("0");
 		BigDecimal currentCost = new BigDecimal("0");
 		BigDecimal price = new BigDecimal("0");
+		BigDecimal targetRate = new BigDecimal("0.2");//目标盈利率，如果达到则平仓
 		
 		//获得第一个月价格
 		StockData currentData = item.getStockData();
@@ -28,7 +30,7 @@ public class BuyerImpl extends Buyer{
 			System.out.print("本次买入时间为 " + currentData.getDate() + "  \n");
 			//求出本月应该持有的总价值
 			value = value.add(perMonth);
-			//求出本月应该持有的总克数
+			//求出本月应该持有的总克数(手)
 			targetShare = value.divide(price, 4, BigDecimal.ROUND_HALF_EVEN);
 			//求出本月应该购买的克数
 			currentMonth = targetShare.subtract(share);
@@ -46,6 +48,12 @@ public class BuyerImpl extends Buyer{
 			//打印结果
 			System.out.print("成本为： " + cost + "  ");
 			System.out.print("总价值为： " + value + "\n\n");
+			//检验是否到达平仓标准，如果达到则平仓
+			if(rate.compareTo(targetRate) >= 0){
+				cost = cost.subtract(value);
+				value = new BigDecimal("0");
+				System.out.println("平仓！\n\n");
+			}
 		}
 		
 	}
