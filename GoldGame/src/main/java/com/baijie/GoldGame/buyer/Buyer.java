@@ -6,10 +6,10 @@ import com.baijie.GoldGame.gold.Item;
 
 public abstract class Buyer {
 	int num = 1;							//定投轮数
-	BigDecimal cost = new BigDecimal("0"); 	//成本 
-	BigDecimal value = new BigDecimal("0");	//总价值
-	BigDecimal share = new BigDecimal("0");	//持有克数
-	BigDecimal rate = new BigDecimal("0");	//净利率
+	protected BigDecimal cost = new BigDecimal("0"); 	//成本 
+	protected BigDecimal value = new BigDecimal("0");	//总价值
+	protected BigDecimal share = new BigDecimal("0");	//持有克数
+	protected BigDecimal rate = new BigDecimal("0");	//净利率
 	
 	
 	/**
