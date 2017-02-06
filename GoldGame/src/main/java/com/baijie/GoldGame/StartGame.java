@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.baijie.GoldGame.buyer.Buyer;
 import com.baijie.GoldGame.buyer.BuyerImpl;
+import com.baijie.GoldGame.buyer.BuyerImplAdv;
 import com.baijie.GoldGame.common.StockData;
 import com.baijie.GoldGame.common.reader.XLSReader;
 import com.baijie.GoldGame.common.reader.XLSReaderImpl2;

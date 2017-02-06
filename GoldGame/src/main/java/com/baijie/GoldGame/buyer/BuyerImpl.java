@@ -22,18 +22,20 @@ public class BuyerImpl extends Buyer{
 		BigDecimal price = new BigDecimal("0");
 		BigDecimal targetRate = new BigDecimal("0.2");//目标盈利率，如果当前轮次盈利率高于它，则平仓
 		BigDecimal currentRate = new BigDecimal("0");//当前轮次盈利率
+		BigDecimal currentValue = new BigDecimal("0");//当前轮次持股价值
 		
 		//获得第一个月价格
 		StockData currentData = item.getStockData();
 		for( ; currentData != null; currentData = item.getStockData()){
 			price = currentData.getClosingPrice();
 			System.out.print("定投轮数 " + num + "  ");
-			num ++ ;
+			num++;
 			System.out.print("本次买入时间为 " + currentData.getDate() + "  \n");
 			//求出本月应该持有的总价值
-			value = value.add(perMonth);
+			currentValue = currentValue.add(perMonth);//本轮次持股价值
+			value = value.add(perMonth);//总持股价值（不清零）
 			//求出本月应该持有的总克数(手)
-			targetShare = value.divide(price, 4, BigDecimal.ROUND_HALF_EVEN);
+			targetShare = currentValue.divide(price, 4, BigDecimal.ROUND_HALF_EVEN);
 			//求出本月应该购买的克数
 			currentMonth = targetShare.subtract(share);
 			//求出本月的花费
@@ -47,7 +49,7 @@ public class BuyerImpl extends Buyer{
 			System.out.print("当前手数为" + targetShare + "  ");
 			//打印当前盈利率
 			currentRate = value.subtract(currentRoundCost).divide(value, 4, BigDecimal.ROUND_HALF_EVEN);
-			System.out.print("当前净利率为" + rate + "  ");
+			System.out.print("当前净利率为" + currentRate + "  ");
 			//打印总盈利率
 			rate = value.subtract(cost).divide(value, 4, BigDecimal.ROUND_HALF_EVEN);
 			System.out.print("总净利率为" + rate + "  ");
