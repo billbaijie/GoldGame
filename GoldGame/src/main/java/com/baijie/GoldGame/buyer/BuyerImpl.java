@@ -11,6 +11,7 @@ import com.baijie.GoldGame.gold.Item;
  *价值定投的买家类
  *每个月让自己的持股价值增加一个定值
  *在盈利率达到一定水准时，平仓卖出，并重新开始定投
+ *总成本在平仓时不清零
  */
 public class BuyerImpl extends Buyer{
 	
@@ -19,7 +20,7 @@ public class BuyerImpl extends Buyer{
 		BigDecimal currentMonth = new BigDecimal("0");
 		BigDecimal currentMonthCost = new BigDecimal("0");
 		BigDecimal currentRoundCost = new BigDecimal("0");//当前轮次成本，每次平仓都会清零
-		BigDecimal price = new BigDecimal("0");
+		BigDecimal price = new BigDecimal("0");//当天收盘价
 		BigDecimal targetRate = new BigDecimal("0.2");//目标盈利率，如果当前轮次盈利率高于它，则平仓
 		BigDecimal currentRate = new BigDecimal("0");//当前轮次盈利率
 		BigDecimal currentValue = new BigDecimal("0");//当前轮次持股价值

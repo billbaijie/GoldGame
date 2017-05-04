@@ -13,7 +13,6 @@ public interface XLSReader {
 	
 	/**
 	 * 读取excel文件,返回list
-	 * @param i 需要注入价格的item
 	 * @param name 文件名
 	 */
 	public List<StockData> ReadExcel(String name);
